@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/store", "root", "");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/store", "root", "root");
 //        statement.executeUpdate("INSERT INTO `categories` (`name`) VALUES ('lalala')");
 
         CategoryDao categoryDao = new CategoryDao(connection);
@@ -23,8 +23,18 @@ public class Main {
 
         List<Customer> customers = customerDao.getAll();
 
-        System.out.println();
+        for(Customer c: customers){
+            System.out.println(c.getFirstName()+" "+c.getLastName()+" "+c.getId());
+        }
 
+        Customer c7 = customerDao.getById(5);
+        System.out.println();
+        customerDao.delete(c7);
+
+        List<Customer> customers1 = customerDao.getAll();
+        for(Customer c: customers1){
+            System.out.println(c.getFirstName()+" "+c.getLastName()+" "+c.getId());
+        }
     }
 
 

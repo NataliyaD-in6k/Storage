@@ -1,5 +1,6 @@
 package natasha.store.dao;
 
+import natasha.store.Category;
 import natasha.store.Customer;
 import natasha.store.Product;
 
@@ -49,6 +50,38 @@ public class CustomerDao {
 
         return customers;
     }
+
+    public void create(Customer customer) throws SQLException {
+        Statement statement = getStatement();
+        statement.executeUpdate("INSERT INTO `customers` (`first_name`, `last_name`) " +
+                "VALUES ('"+customer.getFirstName()+"', '"+customer.getLastName()+"')",
+                Statement.RETURN_GENERATED_KEYS);
+        ResultSet resultSet = statement.getGeneratedKeys();
+        resultSet.next();
+
+        customer.setId(resultSet.getInt(1));
+    }
+
+    public void update(Customer customer) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE `customers` SET `first_name`=?,`last_name`=? WHERE `id` = ?"
+        );
+        preparedStatement.setString(1, customer.getFirstName());
+        preparedStatement.setString(2, customer.getLastName());
+        preparedStatement.setInt(3, customer.getId());
+        preparedStatement.executeUpdate();
+    }
+
+    public void delete(Customer customer) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM `customers` WHERE `id` = ?"
+        );
+        preparedStatement.setInt(1, customer.getId());
+        preparedStatement.executeUpdate();
+        customer.setId(null);
+    }
+
+
 
     private Statement getStatement() throws SQLException {
         return connection.createStatement();

@@ -6,7 +6,6 @@ public class Cashbox {
         Bill bill = new Bill(shoppingCart.getProducts());
         bill.setTotalCost(shoppingCart.getTotalCost());
 
-
         return bill;
 
     }
