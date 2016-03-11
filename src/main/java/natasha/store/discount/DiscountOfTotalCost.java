@@ -10,6 +10,6 @@ public class DiscountOfTotalCost implements Discount {
     }
 
     public String getMessage() {
-        return "lba=bla-bla";
+        return "Discount of total cost applied";
     }
 }
