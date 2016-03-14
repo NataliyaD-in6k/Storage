@@ -17,7 +17,6 @@ public class PromotionOnGroup implements Promotion{
         this.message = message;
     }
 
-
     public boolean applyPromotion(List<Product> products) {
         return false;
     }

@@ -29,12 +29,13 @@ public class Main {
 
         Customer c7 = customerDao.getById(5);
         System.out.println();
-        customerDao.delete(c7);
 
         List<Customer> customers1 = customerDao.getAll();
         for(Customer c: customers1){
             System.out.println(c.getFirstName()+" "+c.getLastName()+" "+c.getId());
         }
+
+
     }
 
 

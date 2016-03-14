@@ -3,19 +3,22 @@ package natasha.store;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Bill {
-    private List<Product> products;
+    private Integer id;
+    private Map<Product, Integer> productCounts;
     private BigDecimal totalCost;
     private BigDecimal discountedTotalCost;
     private List<String> notes = new ArrayList<String>();
 
-    public Bill(List<Product> products) {
-        this.products = products;
+
+    public Bill(Map<Product, Integer> productCounts) {
+        this.productCounts = productCounts;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Map<Product, Integer> getProductCounts() {
+        return productCounts;
     }
 
     public BigDecimal getTotalCost() {

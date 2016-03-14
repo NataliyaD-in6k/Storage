@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Launch {
 //    public static void main(String[] args) {
-//        ShoppingCart shoppingCart = new ShoppingCart();
 //        Category category = new Category("v");
 //        Category category2 = new Category("v2");
 //        List<Product> allProductsInShop = Arrays.asList(new Product("notebook", new BigDecimal(10), category),
