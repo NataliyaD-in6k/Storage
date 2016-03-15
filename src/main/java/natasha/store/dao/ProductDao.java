@@ -109,6 +109,25 @@ public class ProductDao {
         return productMap;
     }
 
+    public List<Product> getProductsByCategoryId(int category_id) throws SQLException {
+        List<Product> products = new ArrayList<Product>();
+        ResultSet rs = getStatement().executeQuery("SELECT * FROM `products` WHERE `category_id` = "+category_id);
+//        PreparedStatement preparedStatement = connection.prepareStatement(
+//                "SELECT * FROM products WHERE category_id = ?"
+//        );
+//        preparedStatement.setInt(1, category_id);
+//        preparedStatement.executeUpdate();
+
+        while(rs.next()){
+            products.add(new Product( rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getBigDecimal("price"),
+                    categoryDao.getById(rs.getInt("category_id"))));
+        }
+
+        return products;
+    }
+
     private Statement getStatement() throws SQLException {
         return connection.createStatement();
     }

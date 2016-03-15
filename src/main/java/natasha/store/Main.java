@@ -6,6 +6,7 @@ import natasha.store.dao.ProductDao;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -19,22 +20,11 @@ public class Main {
         CategoryDao categoryDao = new CategoryDao(connection);
 
         ProductDao productDao = new ProductDao(connection, categoryDao);
-        CustomerDao customerDao = new CustomerDao(connection, productDao);
-
-        List<Customer> customers = customerDao.getAll();
-
-        for(Customer c: customers){
-            System.out.println(c.getFirstName()+" "+c.getLastName()+" "+c.getId());
+        Category c = categoryDao.getById(9);
+        List<Product> products = new ArrayList<Product>(productDao.getProductsByCategoryId(9));
+        for (Product p : products){
+            System.out.println(p.getName());
         }
-
-        Customer c7 = customerDao.getById(5);
-        System.out.println();
-
-        List<Customer> customers1 = customerDao.getAll();
-        for(Customer c: customers1){
-            System.out.println(c.getFirstName()+" "+c.getLastName()+" "+c.getId());
-        }
-
 
     }
 
